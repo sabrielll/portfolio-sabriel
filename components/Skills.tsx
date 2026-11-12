@@ -1,30 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioData, SkillItem } from "@/data/portfolio";
+
+type SkillCategoryFilter = "Semua" | SkillItem["category"];
 
 export default function Skills() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  };
+  const [activeCategory, setActiveCategory] = useState<SkillCategoryFilter>("Semua");
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+  const categories: SkillCategoryFilter[] = [
+    "Semua",
+    "Testing & QA",
+    "Development",
+    "Tools",
+  ];
 
-  // Helper icons for monochrome tech representation
+  const filteredSkills =
+    activeCategory === "Semua"
+      ? portfolioData.skills
+      : portfolioData.skills.filter((s) => s.category === activeCategory);
+
   const renderSkillIcon = (name: string) => {
     switch (name.toLowerCase()) {
       case "postman":
@@ -60,13 +56,13 @@ export default function Skills() {
       case "go":
         return (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         );
       case "next.js":
         return (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
         );
       default:
@@ -79,91 +75,107 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 relative scroll-mt-20">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="skills" className="py-24 relative scroll-mt-20 bg-cream-50">
+      <div className="max-w-6xl mx-auto px-6">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="space-y-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          className="space-y-10"
         >
-          {/* Section Header */}
-          <motion.div variants={itemVariants} className="space-y-2">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">
-                // 02
-              </span>
-              <div className="h-[1px] w-8 bg-zinc-800" />
-              <span className="font-mono text-xs uppercase text-zinc-400 tracking-wider">
-                Keahlian & Teknologi
-              </span>
+          {/* Header + Filter Controls */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-2.5">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs font-semibold text-khaki-600 uppercase tracking-widest">
+                  02 / Keahlian
+                </span>
+                <div className="h-[1px] w-10 bg-khaki-300" />
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
+                Teknologi &amp; Perangkat Kerja
+              </h2>
+              <p className="text-sm text-ink-500 max-w-xl">
+                Perangkat pengujian QA, bahasa pemrograman, dan tools pendukung yang
+                saya gunakan dalam belajar maupun mengerjakan proyek.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
-              Tech Stack & Tooling
-            </h2>
-            <p className="text-sm text-zinc-400 max-w-xl">
-              Perangkat dan teknologi yang saya gunakan sehari-hari untuk pengujian mutu,
-              otomasi tes, dan pengembangan web fullstack.
-            </p>
-          </motion.div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-2 bg-cream-100 p-1.5 rounded-xl border border-cream-200 self-start md:self-auto">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    activeCategory === cat
+                      ? "bg-forest-800 text-cream-50 shadow-sm"
+                      : "text-ink-700 hover:text-forest-800 hover:bg-white/60"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* Skills Grid */}
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          >
-            {portfolioData.skills.map((skill) => (
-              <motion.div
-                key={skill.name}
-                variants={itemVariants}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group relative p-5 rounded-xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-600 transition-all duration-300 flex flex-col justify-between backdrop-blur-sm shadow-sm hover:shadow-black"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-9 h-9 rounded-lg bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:border-zinc-500 transition-colors">
-                      {renderSkillIcon(skill.name)}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {filteredSkills.map((skill) => {
+              const isQA = skill.category === "Testing & QA";
+              const isTools = skill.category === "Tools";
+
+              return (
+                <motion.div
+                  key={skill.name}
+                  layout
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="group p-6 rounded-2xl bg-white border border-cream-200 hover:border-forest-500/40 hover:shadow-md hover:shadow-khaki-300/20 transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-colors ${
+                          isQA
+                            ? "bg-forest-50 border-forest-200 text-forest-800 group-hover:bg-forest-800 group-hover:text-cream-50"
+                            : isTools
+                            ? "bg-khaki-50 border-khaki-200 text-khaki-700 group-hover:bg-khaki-600 group-hover:text-cream-50"
+                            : "bg-cream-100 border-cream-200 text-ink-900 group-hover:bg-forest-700 group-hover:text-cream-50"
+                        }`}
+                      >
+                        {renderSkillIcon(skill.name)}
+                      </div>
+
+                      <span
+                        className={`text-[10px] font-mono font-medium px-2.5 py-1 rounded-md border ${
+                          isQA
+                            ? "bg-forest-50 text-forest-800 border-forest-200"
+                            : isTools
+                            ? "bg-khaki-50 text-khaki-700 border-khaki-200"
+                            : "bg-cream-100 text-ink-700 border-cream-200"
+                        }`}
+                      >
+                        {skill.category}
+                      </span>
                     </div>
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700/50">
-                      {skill.category}
-                    </span>
+
+                    <h3 className="text-base font-bold text-ink-900 group-hover:text-forest-800 transition-colors">
+                      {skill.name}
+                    </h3>
+
+                    <p className="text-xs text-ink-500 mt-2 leading-relaxed">
+                      {skill.description}
+                    </p>
                   </div>
-
-                  <h3 className="text-base font-semibold text-zinc-100 group-hover:text-white transition-colors">
-                    {skill.name}
-                  </h3>
-
-                  <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                    {skill.description}
-                  </p>
-                </div>
-
-                {skill.level && (
-                  <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                    <span>Proficiency</span>
-                    <span className="text-zinc-300 font-medium">{skill.level}</span>
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Quick Monochromatic Badges Line */}
-          <motion.div
-            variants={itemVariants}
-            className="p-4 rounded-xl bg-zinc-950 border border-zinc-800/60 flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono text-zinc-400"
-          >
-            <span className="text-zinc-400">Semua Keahlian:</span>
-            {portfolioData.rawSkills.map((skill, index) => (
-              <span
-                key={index}
-                className="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-600 transition-colors"
-              >
-                {skill}
-              </span>
-            ))}
-          </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
         </motion.div>
       </div>
     </section>

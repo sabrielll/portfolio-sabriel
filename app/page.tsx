@@ -8,23 +8,23 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#09090b] text-[#fafafa] selection:bg-zinc-800 selection:text-white overflow-hidden">
+    <main className="relative min-h-screen bg-cream-50 text-ink-900 selection:bg-forest-800 selection:text-cream-50 overflow-hidden">
       {/* Sticky Translucent Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Executive Split Hero Section */}
       <Hero />
 
-      {/* About Section */}
+      {/* Editorial About Section */}
       <About />
 
-      {/* Skills Grid Section */}
+      {/* Categorized Skills Grid Section */}
       <Skills />
 
-      {/* Projects Showcase Section */}
+      {/* 2-Column Case Studies Section */}
       <Projects />
 
-      {/* Contact Section */}
+      {/* Executive Contact & Footer Section */}
       <Contact />
     </main>
   );

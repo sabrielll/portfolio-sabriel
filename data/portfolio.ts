@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   tagline: string;
-  category: "QA Engineering" | "Fullstack Web" | "Automation";
+  category: "QA Engineering" | "Web Development";
   description: string;
   techStack: string[];
   keyHighlights: string[];
@@ -12,8 +12,12 @@ export interface Project {
 
 export interface SkillItem {
   name: string;
-  category: "Testing & QA" | "Development" | "Tools & DevOps";
-  level?: string;
+  category: "Testing & QA" | "Development" | "Tools";
+  description: string;
+}
+
+export interface InterestItem {
+  title: string;
   description: string;
 }
 
@@ -24,7 +28,7 @@ export interface PortfolioData {
   bioDetails: {
     university: string;
     major: string;
-    focus: string[];
+    interests: InterestItem[];
   };
   skills: SkillItem[];
   rawSkills: string[];
@@ -47,11 +51,17 @@ export const portfolioData: PortfolioData = {
   bioDetails: {
     university: "Universitas Gunadarma",
     major: "Sistem Informasi",
-    focus: [
-      "Automated & Manual API Testing",
-      "End-to-End QA Automation",
-      "Fullstack Web Development",
-      "Continuous Integration & Quality Standards",
+    interests: [
+      {
+        title: "Software Testing & QA",
+        description:
+          "Mempelajari dan mempraktikkan pengujian API, validasi fungsional, serta penulisan skenario uji untuk memastikan aplikasi berjalan sesuai harapan.",
+      },
+      {
+        title: "Pengembangan Web",
+        description:
+          "Membangun antarmuka dan aplikasi web menggunakan teknologi modern dengan struktur kode yang rapi, responsif, dan nyaman digunakan.",
+      },
     ],
   },
   rawSkills: [
@@ -68,81 +78,81 @@ export const portfolioData: PortfolioData = {
     {
       name: "Postman",
       category: "Testing & QA",
-      level: "Advanced",
-      description: "API testing, automated collection runners, environment mocking, dan assertions.",
+      description:
+        "Pengujian endpoint API, manajemen collection, environment variables, dan validasi response.",
     },
     {
       name: "Katalon",
       category: "Testing & QA",
-      level: "Intermediate",
-      description: "Automated web UI & API testing, regression test suite, dan cross-browser validation.",
+      description:
+        "Pembuatan skenario pengujian otomatis untuk web UI dan API serta pengecekan alur pengguna.",
     },
     {
       name: "Docker",
-      category: "Tools & DevOps",
-      level: "Intermediate",
-      description: "Containerization environment pengujian terisolasi dan deployment konsisten.",
+      category: "Tools",
+      description:
+        "Menjalankan container agar lingkungan pengujian dan pengembangan tetap konsisten.",
     },
     {
       name: "Figma",
-      category: "Tools & DevOps",
-      level: "Intermediate",
-      description: "UI/UX design inspection, wireframing, dan verifikasi kesesuaian implementasi visual.",
+      category: "Tools",
+      description:
+        "Membaca desain UI/UX, membuat wireframe, dan memastikan kesesuaian tampilan dengan desain.",
     },
     {
       name: "Python",
       category: "Development",
-      level: "Intermediate",
-      description: "Scripting test automation, automated data validation, dan web scraping.",
+      description:
+        "Bahasa pemrograman untuk scripting pengujian, pengolahan data, dan otomasi tugas sederhana.",
     },
     {
       name: "Go",
       category: "Development",
-      level: "Intermediate",
-      description: "High-performance backend API services dan concurrency handling.",
+      description:
+        "Pengembangan layanan backend dan REST API dengan struktur yang ringan dan terorganisir.",
     },
     {
       name: "Next.js",
       category: "Development",
-      level: "Advanced",
-      description: "Fullstack React framework, Server Components, App Router, dan SSR/SSG.",
+      description:
+        "Framework React modern untuk membangun aplikasi web dengan routing dan rendering yang cepat.",
     },
     {
       name: "Javascript",
       category: "Development",
-      level: "Advanced",
-      description: "Modern ES6+, DOM manipulation, asynchronous programming, dan script testing.",
+      description:
+        "Bahasa utama untuk interaktivitas frontend, logika aplikasi web, dan test scripting.",
     },
   ],
   projects: [
     {
       id: "ecommerce-api-testing",
-      title: "E-Commerce API & Automation Testing Suite",
-      tagline: "Comprehensive Automated QA & Performance Pipeline",
+      title: "E-Commerce API Testing",
+      tagline: "Pengujian Endpoint & Validasi Alur Transaksi",
       category: "QA Engineering",
       description:
-        "Suite pengujian otomatis menyeluruh untuk platform e-commerce yang mencakup autentikasi JWT, alur transaksi pembayaran, manajemen inventaris, dan validasi beban traffic tinggi. Dilengkapi dokumentasi Postman terstruktur dan automated regression pipeline.",
-      techStack: ["Postman", "Katalon", "Docker", "Python", "Javascript"],
+        "Proyek pengujian API untuk sistem e-commerce yang mencakup alur registrasi, autentikasi token, manajemen keranjang belanja, dan checkout menggunakan Postman serta Katalon.",
+      techStack: ["Postman", "Katalon", "Docker", "Javascript"],
       keyHighlights: [
-        "120+ Automated API Test Cases dengan assertion ketat",
-        "Pipeline verifikasi integrasi payment gateway sandbox",
-        "Laporan eksekusi otomatis dengan status pass rate 99.2%",
+        "Penyusunan test collection terstruktur untuk skenario positif & negatif",
+        "Validasi status code, struktur JSON response, dan autentikasi pengguna",
+        "Lingkungan pengujian terisolasi menggunakan Docker container",
       ],
       githubUrl: "https://github.com/sabrielll",
       liveUrl: "https://github.com/sabrielll",
     },
     {
       id: "ml-guide-app",
-      title: "Mobile Legends Guide & Hero Analytics Web App",
-      tagline: "Interactive Fullstack Game Guide & Build Optimizer",
-      category: "Fullstack Web",
+      title: "Mobile Legends Guide Web App",
+      tagline: "Aplikasi Panduan Hero & Build Item Interaktif",
+      category: "Web Development",
       description:
-        "Aplikasi web interaktif untuk strategi hero, rekomendasi build item berbasis meta game, dan kalkulator kombo Mobile Legends. Dibangun dengan Next.js App Router dan microservice backend cepat menggunakan Go, diuji dengan end-to-end integration test.",
-      techStack: ["Next.js", "Go", "Docker", "Javascript", "Figma"],
+        "Aplikasi web panduan hero Mobile Legends yang menyajikan informasi role, rekomendasi build item, dan detail skill dengan antarmuka responsif menggunakan Next.js dan backend API berbasis Go.",
+      techStack: ["Next.js", "Go", "Javascript", "Figma"],
       keyHighlights: [
-        "Desain antarmuka monokromatik modern & responsif",
-        "Fast REST API query latency di bawah 80ms menggunakan Go",
-        "Implementasi automated testing untuk keandalan kalkulasi status item",
+        "Desain antarmuka bersih, responsif & nyaman digunakan",
+        "Pencarian dan filter hero berdasarkan role secara dinamis",
+        "Integrasi API menggunakan Go dengan struktur endpoint yang rapi",
       ],
       githubUrl: "https://github.com/sabrielll",
       liveUrl: "https://github.com/sabrielll",
@@ -153,7 +163,7 @@ export const portfolioData: PortfolioData = {
     github: "https://github.com/sabrielll",
     githubUsername: "sabrielll",
     location: "Depok / Jakarta, Indonesia",
-    availability: "Tersedia untuk Magang, Part-time, & Full-time Opportunities",
+    availability: "Terbuka untuk Magang & Kolaborasi Proyek",
   },
   navLinks: [
     { name: "Tentang", href: "#about" },

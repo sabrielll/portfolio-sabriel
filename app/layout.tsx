@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Ibnu Sabriel | Quality Assurance Engineer & Web Developer",
   description:
-    "Portofolio resmi Ibnu Sabriel - Quality Assurance Engineer & Fullstack Web Developer. Spesialisasi dalam API testing, automated regression, dan modern web application.",
+    "Portofolio profesional Ibnu Sabriel - Quality Assurance Engineer & Web Developer. Spesialisasi dalam API testing, test automation, dan pengembangan aplikasi web modern.",
   keywords: [
     "Ibnu Sabriel",
     "Quality Assurance",
@@ -29,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ibnu Sabriel | Quality Assurance Engineer",
     description:
-      "Portofolio Ibnu Sabriel - Mahasiswa Sistem Informasi Universitas Gunadarma, minat dalam QA Testing dan Fullstack Web Development.",
+      "Portofolio Ibnu Sabriel - Mahasiswa Sistem Informasi Universitas Gunadarma, fokus pada QA Testing dan Fullstack Web Development.",
     type: "website",
   },
 };
@@ -40,8 +46,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`dark ${inter.variable} scroll-smooth`}>
-      <body className="min-h-screen bg-[#09090b] text-[#fafafa] font-sans antialiased selection:bg-zinc-800 selection:text-white">
+    <html
+      lang="id"
+      className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} scroll-smooth`}
+    >
+      <body className="min-h-screen bg-cream-50 text-ink-900 font-sans antialiased">
         {children}
       </body>
     </html>

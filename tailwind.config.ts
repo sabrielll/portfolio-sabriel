@@ -6,32 +6,46 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        border: "var(--border)",
-        card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+        cream: {
+          50: "#FAF8F5",
+          100: "#F4F0E8",
+          200: "#E8E1D3",
+          300: "#DBD1BE",
         },
-        muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+        forest: {
+          50: "#F2F7F4",
+          100: "#E6EFE9",
+          200: "#C5D9CC",
+          500: "#407056",
+          600: "#315B44",
+          700: "#264B37",
+          800: "#1B4332",
+          900: "#132A1F",
+          950: "#0B1912",
         },
-        accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+        khaki: {
+          50: "#FAF7F2",
+          100: "#F2ECE0",
+          200: "#E3D9C4",
+          300: "#D4C8B0",
+          400: "#BCA988",
+          500: "#A69473",
+          600: "#8F7E5F",
+          700: "#736449",
+        },
+        ink: {
+          900: "#16231C",
+          700: "#37463E",
+          500: "#5C6B63",
+          400: "#7E8C84",
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "Inter", "sans-serif"],
+        sans: ["var(--font-sans)", "Plus Jakarta Sans", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
-      },
-      animation: {
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },
